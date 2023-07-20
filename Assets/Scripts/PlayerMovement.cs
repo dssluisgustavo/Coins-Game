@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Rigidbody2D rigidBody;
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
+    bool canJump;
     [SerializeField] Animator animator;
     void Start()
     {
@@ -28,9 +29,14 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector2(1, transform.localScale.y);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && canJump)
         {
             rigidBody.AddForce(Vector2.up * jumpForce);
+
+            if(animator.GetBool("isGrounded") == false)
+            {
+                canJump = false;
+            }
         }
     }
 
@@ -45,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         animator.SetBool("isGrounded", true);
+        canJump = true;
     }
     void OnTriggerExit2D(Collider2D collision)
     {
