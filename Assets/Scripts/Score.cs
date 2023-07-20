@@ -5,25 +5,9 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    public static Score Instance { get; private set; }
-
     [SerializeField] TextMeshProUGUI textMesh;
-    int points;
-    void Start()
+    public void RefreshUI(int points)
     {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else { Destroy(gameObject); }
-
-        points = GameObject.FindObjectsOfType<CoinPickup>().Length;
-        textMesh.text = points.ToString();
-    }
-
-    public void ReduceCoin()
-    {
-        points--;
         textMesh.text = points.ToString();
     }
 }

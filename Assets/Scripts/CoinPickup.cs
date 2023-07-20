@@ -8,7 +8,7 @@ public class CoinPickup : MonoBehaviour
     {
         if(char2D.tag == "Player")
         {
-            Score.Instance.ReduceCoin();
+            GameManager.Instance.ReduceCoin();
             Destroy(gameObject);
         }
     }
